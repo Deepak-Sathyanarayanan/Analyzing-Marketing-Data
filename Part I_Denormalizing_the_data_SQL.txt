@@ -1,0 +1,57 @@
+CREATE TABLE Users(
+user_id INT NOT NULL 	
+EmailID VARCHAR(50)	
+first_name VARCHAR(50)
+last_name VARCHAR(50)	
+gender VARCHAR(10)
+birthday DATETIME
+city VARCHAR(50) 
+state VARCHAR(50)	
+newsletter_sign_up_date DATETIME
+PRIMARY KEY(user_id)
+)
+
+--Load Users data from EXCEL
+
+CREATE TABLE Orders(
+order_id INT NOT NULL	
+purchase_date	
+product VARCHAR(20)	
+listed_price INT	
+paid_price INT	
+LifeTimeValue INT	
+PRIMARY KEY(order_id)
+FOREIGN KEY(user_id)
+)
+
+--Load Orders data from EXCEL
+
+
+--Creating table for data mining
+
+CREATE TABLE Customers(
+user_id INT NOT NULL 	
+first_name VARCHAR(50)
+last_name VARCHAR(50)	
+order_id INT NOT NULL	
+purchase_date	
+product VARCHAR(20)	
+listed_price INT	
+paid_price INT	
+LifeTimeValue INT	
+gender VARCHAR(10)
+birthday DATETIME
+city VARCHAR(50) 
+state VARCHAR(50)	
+EmailID VARCHAR(50)	
+newsletter_sign_up_date DATETIME
+PRIMARY KEY(order_id)
+)
+
+
+--Inserting denormalized data
+insert into Customers
+Select *
+From Orders O
+Left Join Users U
+on O.user_id = U.User_ID
